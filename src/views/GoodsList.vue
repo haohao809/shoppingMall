@@ -45,8 +45,7 @@
 		<div id="">
 			
 		</div>
-		<div class="md-overlay hidden" v-show="overLayFlag" @click="closePop">
-			
+		<div class="md-overlay hidden" v-show="overLayFlag" @click.stop="closePop">
 		</div>
 		<nav-footer></nav-footer>
 	</div>
@@ -90,7 +89,7 @@
 			NavHeader,
 			NavBread
 		},
-		method:{
+		methods:{
 			showFilterPop(){
 				this.filterBy = true;
 				this.overLayFlag = false;
@@ -99,7 +98,6 @@
 				
 			},
 			closePop(){
-				
 			},
 			
 			
