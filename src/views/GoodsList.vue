@@ -13,12 +13,12 @@
             <a href="javascript:void(0)" class="filterby stopPop" @click.stop="showFilterPop">Filter by</a>
           </div>
 			<div class="accessory-result">
-				<div class="filter stopPop" id="filter" :bind="{'filterby-show': filterBy}">
+				<div class="filter stopPop" id="filter" :class="{'filterby-show': filterBy}">
 					<dl class="filter-price">
 						<dt>Price:</dt>
 						<dd><a href="javascript: void(0)" :class="{'cur': priceChecked === 'all'}" @click="priceChecked='all'">All</a></dd>
 						<dd v-for="(price,index) in priceFilter">
-							<a href="javascript:void(0)" @click="priceChecked=index":class="{cur:priceChecked===index}">{{price.startPrice}}-{{price.endPrice}}</a>
+							<a href="javascript:void(0)" @click="setPriceFilter(index)":class="{cur:priceChecked===index}">{{price.startPrice}}-{{price.endPrice}}</a>
 						</dd>
 					</dl>
 				</div>
@@ -45,7 +45,7 @@
 		<div id="">
 			
 		</div>
-		<div class="md-overlay hidden" v-show="overLayFlag" @click.stop="closePop">
+		<div class="md-overlay" v-show="overLayFlag" @click.stop="closePop">
 		</div>
 		<nav-footer></nav-footer>
 	</div>
@@ -81,7 +81,8 @@
                 ],
                 priceChecked: 'all',
                 filterBy: false,
-                overLayFlag: false
+                overLayFlag: false,
+                sortFlag:true,
 			}
 		},
 		components:{
@@ -92,14 +93,20 @@
 		methods:{
 			showFilterPop(){
 				this.filterBy = true;
-				this.overLayFlag = false;
+				this.overLayFlag = true;
 			},
 			sortGoods(){
 				
 			},
 			closePop(){
-			},
-			
+				this.overLayFlag = false;
+				this.filterBy = false;
+			},   
+			setPriceFilter(index){
+				this.priceChecked = index;
+				this.overLayFlag = false;
+				this.filterBy = false;
+			}
 			
 			
 			
