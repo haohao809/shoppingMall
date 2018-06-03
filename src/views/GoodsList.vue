@@ -57,6 +57,7 @@
 	import NavHeader from '@/components/NavHeader.vue'
 	import NavFooter from '@/components/NavFooter.vue'
 	import NavBread from '@/components/NavBread.vue'
+	import axios from 'axios'
 	export default{
 		data() {
 			return {
@@ -84,6 +85,18 @@
                 overLayFlag: false,
                 sortFlag:true,
 			}
+		},
+		mounted(){
+			axios.get("/goods").then((response) =>{
+				let res = response.data.result.list[0];
+				console.log(res)
+				if(res.status === "0") {					
+					this.goodsList = res.result.list;
+					console.log(this.goodsList)
+				}else{
+					this.goodsList = [];
+				}
+			})
 		},
 		components:{
 			NavFooter,

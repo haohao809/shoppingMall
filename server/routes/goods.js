@@ -35,7 +35,7 @@ router.get("/",function(req,res,next) {
 			})
 		}
 	})
-	res.send("hello,goods list .")
+//	res.send("hello,goods list .")
 })
 
 module.exports = router;
