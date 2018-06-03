@@ -25,14 +25,18 @@ router.get("/",function(req,res,next) {
 				msg: err.message
 			})
 		}else{
-			res.json({
-				status:'0',
-				msg:'',
-				result:{
-					count:doc.length,
-					list:doc
-				}
-			})
+			res.json(
+//				{
+//				status:'0',
+//				msg:'',
+//				result:{
+//					count:doc.length,
+//					list:doc
+//				}
+//				data:doc
+//			}
+				doc
+				)
 		}
 	})
 //	res.send("hello,goods list .")
