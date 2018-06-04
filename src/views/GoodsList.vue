@@ -88,7 +88,7 @@
 		},
 		mounted(){
 			axios.get("/goods").then((response) =>{
-				let res = response.data[0];
+				let res = response.data;
 				console.log(res)
 				if(res.status === "0") {					
 					this.goodsList = res.result.list;
