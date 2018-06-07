@@ -37,8 +37,14 @@
 		                      </div>
 		                    </div>
 		                  </li>
-		                </ul>
+		                </ul>		                
 		              </div>
+		              <div class="view-more-normal"
+                   			v-infinite-scroll="loadMore"
+                   			infinite-scroll-disabled="busy"
+                   			infinite-scroll-distance="20">
+                			<img src="./../assets/loading-spinning-bubbles.svg" v-show="loading">
+              		  </div>
 		         </div>
 	         </div>
          </div>
@@ -85,11 +91,13 @@
                 overLayFlag: false,
                 sortFlag:true,
                 page:1,
-                pageSize: 8
+                pageSize: 8,
+                busy: true,
+                loading:false
 			}
 		},
 		mounted(){
-			this.goodList();
+			this.getGoodList();
 		},
 		components:{
 			NavFooter,
@@ -104,7 +112,7 @@
 			sortGoods(){
 				this.sortFlag = !this.sortFlag;
 				this.page = 1;
-				this.goodList();
+				this.getGoodList();
 				
 			},
 			closePop(){
@@ -116,7 +124,7 @@
 				this.overLayFlag = false;
 				this.filterBy = false;
 			},
-			goodList(){
+			getGoodList(flag){
 				var param = {
 					page:this.page,
 					pageSize:this.pageSize,
@@ -127,13 +135,34 @@
 				}).then((response) =>{
 				let res = response.data;
 				console.log(res)
-				if(res.status === "0") {					
+				if(res.status === "0") {
+					if(flag){
+						this.goodList = this.goodList.concat(res.result.list);
+						
+						if(res.result.count === 0){
+							this.busy = true;
+							this.loading = false;
+						}else{
+							this.busy = false;
+						}
+					}else{
+						this.goodList = res.result.list;
+						this.busy = false;
+					}
 					this.goodsList = res.result.list;
 					console.log(this.goodsList)
 				}else{
 					this.goodsList = [];
 				}
 			})
+			},
+			loadMore(){
+				this.loading = true;
+				this.busy = true;
+				setTimeout(() => {
+					this.page++;
+					this.getGoodList(true);
+				},500)
 			}
 			
 			
