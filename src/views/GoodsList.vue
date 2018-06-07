@@ -84,19 +84,12 @@
                 filterBy: false,
                 overLayFlag: false,
                 sortFlag:true,
+                page:1,
+                pageSize: 8
 			}
 		},
 		mounted(){
-			axios.get("/goods").then((response) =>{
-				let res = response.data;
-				console.log(res)
-				if(res.status === "0") {					
-					this.goodsList = res.result.list;
-					console.log(this.goodsList)
-				}else{
-					this.goodsList = [];
-				}
-			})
+			this.goodList();
 		},
 		components:{
 			NavFooter,
@@ -109,6 +102,9 @@
 				this.overLayFlag = true;
 			},
 			sortGoods(){
+				this.sortFlag = !this.sortFlag;
+				this.page = 1;
+				this.goodList();
 				
 			},
 			closePop(){
@@ -119,6 +115,25 @@
 				this.priceChecked = index;
 				this.overLayFlag = false;
 				this.filterBy = false;
+			},
+			goodList(){
+				var param = {
+					page:this.page,
+					pageSize:this.pageSize,
+					sort: this.sortFlag ? 1:-1
+				}
+				axios.get("/goods",{
+					params:param
+				}).then((response) =>{
+				let res = response.data;
+				console.log(res)
+				if(res.status === "0") {					
+					this.goodsList = res.result.list;
+					console.log(this.goodsList)
+				}else{
+					this.goodsList = [];
+				}
+			})
 			}
 			
 			
