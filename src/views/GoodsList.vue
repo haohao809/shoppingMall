@@ -31,7 +31,7 @@
 		                    </div>
 		                    <div class="main">
 		                      <div class="name">{{item.productName}}</div>
-		                      <div class="price">{{item.salePrice | currency('$')}}</div>
+		                      <div class="price">{{item.salePrice }}</div>
 		                      <div class="btn-area">
 		                        <a href="javascript:;" class="btn btn--m" @click="addCart(item.productId)">加入购物车</a>
 		                      </div>
@@ -137,8 +137,8 @@
 				console.log(res)
 				if(res.status === "0") {
 					if(flag){
-						this.goodList = this.goodList.concat(res.result.list);
-						
+						this.goodsList = this.goodsList.concat(res.result.list);
+					
 						if(res.result.count === 0){
 							this.busy = true;
 							this.loading = false;
@@ -146,11 +146,9 @@
 							this.busy = false;
 						}
 					}else{
-						this.goodList = res.result.list;
+						this.goodsList = res.result.list;
 						this.busy = false;
 					}
-					this.goodsList = res.result.list;
-					console.log(this.goodsList)
 				}else{
 					this.goodsList = [];
 				}
