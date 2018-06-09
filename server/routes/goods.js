@@ -27,7 +27,7 @@ router.get("/",function(req,res,next) {
 	var priceGt = '',
 		priceLte = '';
 	if(priceLevel !== "all"){
-		switch (priceGt) {
+		switch (priceLevel) {
 			case '0': priceGt = 0;priceLte = 100;break;
 			case '1': priceGt = 100;priceLte = 500;break;
 			case '2': priceGt = 500;priceLte = 1000;break;
