@@ -123,12 +123,15 @@
 				this.priceChecked = index;
 				this.overLayFlag = false;
 				this.filterBy = false;
+				this.page = 1;
+				this.getGoodList();
 			},
 			getGoodList(flag){
 				var param = {
 					page:this.page,
 					pageSize:this.pageSize,
-					sort: this.sortFlag ? 1:-1
+					sort: this.sortFlag ? 1:-1,
+					priceLevel:this.priceChecked
 				}
 				axios.get("/goods",{
 					params:param

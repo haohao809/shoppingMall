@@ -21,8 +21,25 @@ router.get("/",function(req,res,next) {
 	var sort =req.param("sort") ;
 	let page =parseInt(req.param("page"));
 	let pageSize = parseInt(req.param("pageSize"));
+	let priceLevel = req.param("priceLevel");
 	let skip = (page-1)*pageSize;
 	let params ={};
+	var priceGt = '',
+		priceLte = '';
+	if(priceLevel !== "all"){
+		switch (priceGt) {
+			case '0': priceGt = 0;priceLte = 100;break;
+			case '1': priceGt = 100;priceLte = 500;break;
+			case '2': priceGt = 500;priceLte = 1000;break;
+			case '3': priceGt = 1000;priceLte = 5000;break;
+		}
+		params = {
+			salePrice:{
+				$gt:priceGt,
+				$lte:priceLte
+			}
+		}
+	}
 	let goodsModel =Goods.find(params).skip(skip).limit(pageSize);
 	goodsModel.sort({'salePrice':sort});
 	
