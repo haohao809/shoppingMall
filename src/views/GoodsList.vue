@@ -133,10 +133,12 @@
 					sort: this.sortFlag ? 1:-1,
 					priceLevel:this.priceChecked
 				}
+				this.loading = true;
 				axios.get("/goods",{
 					params:param
 				}).then((response) =>{
 				let res = response.data;
+				this.loading = false;
 				console.log(res)
 				if(res.status === "0") {
 					if(flag){
@@ -164,6 +166,18 @@
 					this.page++;
 					this.getGoodList(true);
 				},500)
+			},
+			addCart(productId){
+				axios.post("/goods/addCart",{
+					productId:productId
+				}).then((res) => {
+					 var res = res.data;
+					 if(res.status == 0){
+					 	alert('添加成功')
+					 }else{
+					 	alert('添加失败')
+					 }
+				})
 			}
 			
 			
