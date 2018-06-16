@@ -48,11 +48,18 @@
 				</div>
 			</div>
 		</div>
-		<div class="md-overlay"></div>
+		<div class="md-overlay" v-if="loginModalFlag"></div>
 	</header>
 </template>
 
 <script>
+	import './../assets/css/login.css'
+	import axios from 'axios'
+	export default{
+		data(){
+			loginModalFlag:false
+		}
+	}
 </script>
 
 <style>
