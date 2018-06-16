@@ -57,10 +57,59 @@
 	import axios from 'axios'
 	export default{
 		data(){
-			loginModalFlag:false
+			return{
+				loginModalFlag:false				
+			}
+
+		},
+		methods:{
+			nickName(){
+				return 'an';
+			}
 		}
 	}
-</script>
+</script> 
 
 <style>
+	.header{
+		width: 100%;
+		background-color: white;
+		font-family: "moderat", sans-serif;
+		font-size: 16px;
+	}
+	.navbar{
+		display: flex;
+		justify-content: space-between;
+		align-content: center;
+		width: 100%;
+		height: 70px;
+		max-width: 1280px;
+		margin: 0 auto;
+		padding: 5px 20px 10px 20px;
+	}
+	.navbar-left-container{
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		margin-left: -20px;
+	}
+	.navbar-right-container{
+		justify-content: flex-start;
+		align-items: center;
+		display: none;
+	}
+	.header a, .footer a {
+	    color: #666;
+	    text-decoration: none;
+	  }
+	 a {
+	    -webkit-transition: color .3s ease-out;
+	    transition: color .3s ease-out;
+	 }
+	 .narbar-menu-container{
+	 	display: flex;
+	 	justify-content: flex-end;
+	 	align-items: center;
+	 	padding-top: 10px;
+	 }
 </style>
