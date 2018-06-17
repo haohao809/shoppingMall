@@ -28,9 +28,9 @@
 			</div>
 			<div class="navbar-right-container" style="display: flex;">
 				<div class="navbar-menu-container">
-					<!--<span class="navbar-link" v-text="nickName" v-if="nickName"></span>-->
-					<a href="javascript: ;" class="navbar-link" @click="loginModalFlag=true">Login</a>
-					<!--<a href="javascript: ;" class="navbar-link">Logut</a>-->
+					<span class="navbar-link" v-text="nickName" v-if="nickName"></span>
+					<a href="javascript: ;" class="navbar-link" @click="loginModalFlag=true" v-if="!nickName">Login</a>
+					<a href="javascript: ;" class="navbar-link" v-else>Logut</a>
 					<div class="navbar-cart-container">
 	                  <a class="navbar-link navbar-cart-link" href="/#/cart">
 	                    <svg class="navbar-cart-logo">
@@ -66,12 +66,12 @@
 						</ul>
 					</div>
 					<div class="login-wrap">
-						<a href="" class="btn-login" @click="login">登 录</a>
+						<a href="javascript:;" class="btn-login" @click="login">登 录</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="md-overlay" v-if="loginModalFlag"></div>
+		<div class="md-overlay" v-if="loginModalFlag" @click="loginModalFlag=false"></div>
 	</header>
 </template>
 
@@ -84,14 +84,12 @@
 				loginModalFlag:false,
 				errorTip: false,
 				userName: '',
-				userPwd: ''
+				userPwd: '',
+				nickName: '',
 			}
 
 		},
 		methods:{
-			nickName(){
-				return 'an';
-			},
 			login(){
                 if(!this.userName || !this.userPwd){
                   this.errorTip = true;
@@ -105,6 +103,7 @@
 					if(res.status == "0") {
 						this.errorTip = false;
 						this.loginModalFlag = false;
+						this.nickName = res.result.userName;
 					}else{
 						this.errorTip = true;
 					}
