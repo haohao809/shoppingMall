@@ -42,6 +42,7 @@ router.post("/login",function(req,res,next) {
 
 //登出
 router.post('/logout',function(req,res,next) {
+	
 	if(req.cookies.userId){
 		 res.json({
 		 	status: '0',
