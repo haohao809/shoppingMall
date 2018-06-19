@@ -28,11 +28,11 @@ app.use(function (req,res,next) {
 	if(req.cookies.userId) {
 		next();
 	}else{
-		 if(req.originalUrl == '/users/login' || req.originalUrl =='/users/logout' || req.path == 'goods/list'){
-		 		next()
+		 if(req.originalUrl == '/users/login' || req.originalUrl =='/users/logout' || req.path == '/goods/list'){
+		 		next();
 		 }else{
 		 		res.json({
-		 			ststus: '10001',
+		 			status: '10001',
 		 			msg: '当前未登录',
 		 			result: ''
 		 		})
