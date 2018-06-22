@@ -5,6 +5,7 @@
 			<span>Goods</span>
 		</nav-bread>
 		<!-- filter -->
+  <div class="accessory-result-page accessory-page">
 		<div class="container">
 		  <div class="filter-nav">
             <span class="sortby">Sort by:</span>
@@ -48,9 +49,15 @@
 		         </div>
 	         </div>
          </div>
-		<div id="">
-			
-		</div>
+      </div>
+	<modal :mdShow="mdShow" @close="closeModal">
+		<p slot="message">
+             	请先登录,否则无法加入到购物车中!			
+		</p>		
+		<p slot="btnGroup">
+			<a class="btn btn--m" href="javascript:;" @click="mdShow = false">关闭</a>			
+		</p>
+	</modal>
 		<div class="md-overlay" v-show="overLayFlag" @click.stop="closePop">
 		</div>
 		<nav-footer></nav-footer>
@@ -63,11 +70,13 @@
 	import NavHeader from '@/components/NavHeader.vue'
 	import NavFooter from '@/components/NavFooter.vue'
 	import NavBread from '@/components/NavBread.vue'
+	import Modal from './../components/Modal'
 	import axios from 'axios'
 	export default{
 		data() {
 			return {
 				goodsList:[],
+                mdShow:false,
 				priceFilter:[
                   {
                       startPrice:'0.00',
@@ -102,7 +111,8 @@
 		components:{
 			NavFooter,
 			NavHeader,
-			NavBread
+			NavBread,
+			Modal
 		},
 		methods:{
 			showFilterPop(){
@@ -175,7 +185,7 @@
 					 if(res.status == 0){
 					 	alert('添加成功')
 					 }else{
-					 	alert('添加失败')
+					 	this.mdShow = true;
 					 }
 				})
 			}
