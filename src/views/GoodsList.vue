@@ -58,6 +58,16 @@
 			<a class="btn btn--m" href="javascript:;" @click="mdShow = false">关闭</a>			
 		</p>
 	</modal>
+	<modal :mdShow="mdShowCart" @close="closeModal">
+        <svg class="icon-status-ok">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-status-ok"></use>
+        </svg>
+     	<span>加入购物车成!</span>	
+		<p slot="btnGroup">
+			<a class="btn btn--m" href="javascript:;" @click="mdShowCart = false">继续购物</a>
+			<router-link class="btn btn--m btn--red" href="javascript:;" to="/cart">查看购物车</router-link>
+		</p>
+	</modal>
 		<div class="md-overlay" v-show="overLayFlag" @click.stop="closePop">
 		</div>
 		<nav-footer></nav-footer>
@@ -77,6 +87,7 @@
 			return {
 				goodsList:[],
                 mdShow:false,
+                mdShowCart: false,
 				priceFilter:[
                   {
                       startPrice:'0.00',
@@ -183,11 +194,15 @@
 				}).then((res) => {
 					 var res = res.data;
 					 if(res.status == 0){
-					 	alert('添加成功')
+					 	this.mdShowCart = true;
 					 }else{
 					 	this.mdShow = true;
 					 }
 				})
+			},
+			closeModal(){
+				this.mdShowCart = false;
+				this.mdShow =false;
 			}
 			
 			
