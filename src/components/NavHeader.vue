@@ -61,7 +61,7 @@
 							</li> 
 							<li class="regi_form_input">
 								<i class="icon IconPwd"></i>
-								<input type="password" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="Password" v-model="userPwd">
+								<input type="password" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="Password" v-model="userPwd" @keyup.enter="login">
 							</li> 							
 						</ul>
 					</div>

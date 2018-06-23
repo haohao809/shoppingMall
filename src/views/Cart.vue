@@ -154,6 +154,9 @@
           NavBread,
           Modal
         }, 
+        mounted(){
+        	this.init()
+        },
         computed:{
         	checkAllFlag(){
         		
@@ -171,6 +174,12 @@
         	},
         	checkOut(){
         		
+        	},
+        	init(){
+        		axios.get("/users/cartList").then((response) =>{
+        			let res = response.data;
+        			this.cartList = res.result
+        		})
         	}
         }
     }
