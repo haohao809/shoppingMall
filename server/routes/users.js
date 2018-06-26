@@ -57,6 +57,24 @@ router.post('/logout',function(req,res,next) {
     });		
 	}
 })
+
+router.get("/checkLogin",function(req,res,next) {
+	if(req.cookies.userId){
+		res.json({
+			status: '0',
+			msg: '',
+			result:req.cookies.userName || ''
+		})
+	}else{
+    res.json({
+      status:'1',
+      msg:'未登录',
+      result:''
+    });		
+	}
+})
+
+
 //查询当前用户购物车数据
 router.get("/cartList",function(req,res,next){
 		var userId = req.cookies.userId;
