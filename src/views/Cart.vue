@@ -129,6 +129,13 @@
     		</div>
     	</div>
     </div>
+    <Modal :mdShow="modalConfirm" @close="closeModal">
+    	<p slot="message">你确认要删除此条数据吗?</p>
+    	<div slot="btnGroup">
+    		<a class="btn btn--m" href="javascript:;" @click="delCart">确认</a>
+    		<a class="btn btn--m btn--red" href="javascript:;" @click="modalConfirm = false">关闭</a>
+    	</div>
+    </Modal>
     <nav-footer></nav-footer>
 </div>
 	
