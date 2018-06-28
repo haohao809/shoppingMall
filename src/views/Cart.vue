@@ -152,7 +152,8 @@
     export default{
     	data(){
     		return{
-    			cartList:[]
+    			cartList:[],
+    			modalConfirm: false
     		}
     	},
         components:{
@@ -187,7 +188,15 @@
         			let res = response.data;
         			this.cartList = res.result
         		})
+        	},
+        	closeModal(){
+        		this.modalConfirm = false;
+        	},
+        	delCart(){
+        		
         	}
+        	
+        	
         }
     }
 </script>

@@ -96,4 +96,10 @@ router.get("/cartList",function(req,res,next){
 			 }
 		})
 });
+//购物车删除
+router.post("/cartDel", function(req,res,next){
+	var userId = req.cookies.userId,productId = req.body.productId;
+	
+})
+
 module.exports = router;
