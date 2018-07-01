@@ -211,19 +211,22 @@
             editCart(flag,item){
                     if(flag==='add'){
                         item.productNum++;
-                    }else{
+                    }else if(flag==='minus'){
                         if(item.productNum<=1){
                             return;
-                        }else{
-                            item.productNum--;
                         }
+                            item.productNum--;
+
+                    }else{
+                          item.checked = item.checked === '1' ? '0':'1';
+                    }
                         axios.post("/users/cartEdit",{
                             productId:item.productId,
-                            productNum:item.productNum
+                            productNum:item.productNum,
+                            checked:item.checked
                         }).then((response) =>{
                             let res = response.data;
                         })
-                    }
 
             }
         	
