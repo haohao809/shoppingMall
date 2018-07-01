@@ -217,6 +217,12 @@
                         }else{
                             item.productNum--;
                         }
+                        axios.post("/users/cartEdit",{
+                            productId:item.productId,
+                            productNum:item.productNum
+                        }).then((response) =>{
+                            let res = response.data;
+                        })
                     }
 
             }
