@@ -207,7 +207,19 @@
         	delCartConfirm(productId){
         		this.modalConfirm = true;
         		this.productId = productId;
-        	}
+        	},
+            editCart(flag,item){
+                    if(flag==='add'){
+                        item.productNum++;
+                    }else{
+                        if(item.productNum<=1){
+                            return;
+                        }else{
+                            item.productNum--;
+                        }
+                    }
+
+            }
         	
         	
         }
