@@ -123,7 +123,7 @@ router.post("/cartDel", function(req,res,next){
 			}
 	})
 })
-router.post("/careEdit",function (req,res,next) {
+router.post("/cartEdit",function (req,res,next) {
 	var userId = req.cookies.userId,
 		productId = req.body.productId,
 		productNum = req.body.productNum,
@@ -145,7 +145,6 @@ router.post("/careEdit",function (req,res,next) {
 					result: ''
 				})
 			}
-		}
 	})
 
 })
