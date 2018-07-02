@@ -154,7 +154,8 @@
     		return{
     			cartList:[],
     			modalConfirm: false,
-    			productId: ''
+    			productId: '',
+    			checkAllFlag: false
     		}
     	},
         components:{
@@ -179,7 +180,7 @@
         },
         methods:{
         	toggleCheckAll(){
-        		
+        		this.checkAllFlag = !this.checkAllFlag
         	},
         	checkOut(){
         		
