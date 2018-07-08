@@ -148,14 +148,14 @@
     import NavBread from './../components/NavBread'
     import Modal from './../components/Modal'
     import axios from 'axios'
+    import {currency} from './../util/currency'
     
     export default{
     	data(){
     		return{
     			cartList:[],
     			modalConfirm: false,
-    			productId: '',
-    			checkAllFlag: false
+    			productId: ''
     		}
     	},
         components:{
@@ -168,19 +168,40 @@
         	this.init()
         },
         computed:{
-        	checkAllFlag(){
-        		
-        	},
         	totalPrice(){
-        		
+         		var money = 0;
+        		this.cartList.forEach((item) => {
+        			if(item.checked == '1') {
+        				money += parseFloat(item.salePrice)*parseInt(item.productNum);
+        			}
+        		})
+        		return money;       		
+        	},
+        	checkAllFlag(){
+        		return this.checkedCount == this.cartList.length;
         	},
         	checkedCount(){
-        		
+        		var num = 0;
+        		this.cartList.forEach((item) => {
+        			if(item.checked == '1') num++;
+        		})
+        		return num;
         	}
         },
         methods:{
         	toggleCheckAll(){
-        		this.checkAllFlag = !this.checkAllFlag
+        		var flag = !this.checkAllFlag;
+        		this.cartList.forEach((item =>{
+        			item.checked = flag ? '1' : '0';
+        		}))
+        		axios.post("/users/editCheckAll",{
+        			checkAll:flag
+        		}).then((response)=>{
+        			let res = response.data;
+        			if(res.ststus === '0'){
+        				console.log('update success');
+        			}
+        		})
         	},
         	checkOut(){
         		
