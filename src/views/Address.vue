@@ -186,8 +186,19 @@
 			closeModal(){
 				
 			},
+          delAddressConfirm(addressId){
+            this.isMdShow = true;
+            this.addressId = addressId;
+          },
 			delAddress(){
-				
+				axios.post("/users/delAddress",{
+					addressId:this.addressId
+				}).then((response)=>{
+					let res = response.data;
+					console.log("del suc");
+					this.isMdShow = false;
+					this.init();
+				})
 			},
 			setDefault(addressId){
 				console.log(addressId);
