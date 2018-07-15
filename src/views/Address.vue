@@ -146,7 +146,20 @@
 	export default {
 		data() {
 			return {
-
+              limit:3,
+              checkIndex:0,
+              selectedAddrId:'',
+              addressList:[],
+              isMdShow:false,
+              addressId:''
+			}
+		},
+		mounted(){
+			
+		},
+		computed:{
+			addressListFilter(){
+				
 			}
 		},
 		components: {
@@ -154,6 +167,17 @@
 			NavFooter,
 			NavBread,
 			Modal
+		},
+		methods:{
+			expand(){
+				
+			},
+			closeModal(){
+				
+			},
+			delAddress(){
+				
+			}
 		}
 
 	}
