@@ -155,7 +155,7 @@
 			}
 		},
 		mounted(){
-			
+			this.init();
 		},
 		computed:{
 			addressListFilter(){
@@ -169,6 +169,13 @@
 			Modal
 		},
 		methods:{
+			init(){
+				axios.get("/users/addressList").then((response)=>{
+					let res = response.data;
+					this.addressList = res.result;
+					this.selectedAddrId = this.addressList[0].addressId;
+				})
+			},
 			expand(){
 				
 			},
