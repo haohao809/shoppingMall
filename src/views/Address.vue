@@ -74,9 +74,9 @@
 										</a>
 									</div>
 									<div class="addr-opration addr-set-default">
-										<a href="javascript:;" class="addr-set-default-btn" v-if="!item.isDefault" @click="setDefault(item.addressId)"><i>Set default</i></a>
+										<a href="javascript:;" class="addr-set-default-btn" v-if="!item.isDefault" @click="setDefault(item.addressId)"><i>设置默认地址</i></a>
 									</div>
-									<div class="addr-opration addr-default" v-if="item.isDefault">Default address</div>
+									<div class="addr-opration addr-default" v-if="item.isDefault">默认地址</div>
 								</li>
 								<li class="addr-new">
 									<div class="add-new-inner">
@@ -159,7 +159,7 @@
 		},
 		computed:{
 			addressListFilter(){
-				
+				return this.addressList.slice(0,this.limit);				
 			}
 		},
 		components: {
@@ -177,13 +177,28 @@
 				})
 			},
 			expand(){
-				
+              if(this.limit==3){
+                this.limit = this.addressList.length;
+              }else{
+                this.limit = 3;
+              }				
 			},
 			closeModal(){
 				
 			},
 			delAddress(){
 				
+			},
+			setDefault(addressId){
+				console.log(addressId);
+				axios.post("/users/setDefault",{
+					addressId:addressId
+				}).then((response)=>{
+					if(response.data.status === '0'){
+						console.log('set default');
+						this.init();
+					}
+				})
 			}
 		}
 
