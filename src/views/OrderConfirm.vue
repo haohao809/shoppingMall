@@ -176,7 +176,19 @@
 				})
 			},
 			payMent(){
-				
+				var addressId = this.$route.query.daaressId;
+				axios.post("/users/payment",{
+					addressId: addressId,
+					orderTotal: this.orderTotal
+				}).then((response)=> {
+					let res = response.data;
+					if(res.status=='0') {
+						console.log('order created suc.');
+						this.$router.push({
+							path:'/orderSuccess?orderId=' + res.result.orderId
+						})
+					}
+				})
 			}
 		}
 	}

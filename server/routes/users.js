@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('./../models/user');
+require('./../util/util');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -317,13 +318,21 @@ router.post("/payMent", function(req, res, next) {
 					goodsList.push(item)
 				}
 			})
+			
+			var platform = '662';
+			var r1 = Math.floor(Math.random()*10);
+			var r2 = Math.floor(Math.random()*10);
+			
+			var sysDate = new Date().Format('yyyyMMddhhmmss');
+			var createDate = new Date().Format('yyyy-MM-dd hh:mm:ss');
+			var orderId = platform + r1 + sysDate + r2;
 			var order = {
-				orderId: '',
+				orderId: orderId,
 				orderTotal: orderTotal,
 				addressInfo: address,
 				goodsList: goodsList,
 				orderStatus: '1',
-				createDate: ''
+				createDate: createDate
 			}
 			doc.orderList.push(order);
 
