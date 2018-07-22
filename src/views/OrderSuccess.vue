@@ -63,11 +63,13 @@
 				return;
 			}
 			axios.get('/users/orderDetail',{
-				orderId: orderId
+				params:{
+					orderId: orderId
+				}	
 			}).then((response) =>{
 				let res = response.data;
 				if(res.status == '0'){
-					this.orserId = orderId;
+					this.orderId = res.result.orderId;
 					this.orderTotal = res.result.orderTotal;
 				}
 			})

@@ -385,8 +385,8 @@ router.get("/orderDetail", function(req, res, next) {
             status: '0',
             msg: '',
             result: {
-              orderId: order.orderId,
-              orderTotal: order.orderTotal
+              orderId: orderId,
+              orderTotal: orderTotal
             }
           });
         } else {
