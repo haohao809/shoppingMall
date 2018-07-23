@@ -14,10 +14,18 @@ Vue.use(VueLazyLoad,{
 })
 Vue.use(infiniteScroll);
 Vue.filter("currency",currency);
-const store = new Vuex.store({
+const store = new Vuex.Store({
 	state:{
 		nickName: '',
 		cartCount: 0
+	},
+	mutations:{
+		updateUserInfo(state,nickName){
+			state.nickName = nickName;
+		},
+		updateCartCount(state,cartCount) {
+			state.cartCount += cartCount;
+		}
 	}
 })
 
@@ -25,6 +33,7 @@ const store = new Vuex.store({
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

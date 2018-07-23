@@ -85,19 +85,25 @@
 				errorTip: false,
 				userName: '',
 				userPwd: '',
-				nickName: '',
+				// nickName: '',
 			}
 
 		},
 		mounted(){
 			this.checkLogin();
 		},
+		computed:{
+			nickName(){
+				return this.$store.state.nickName;
+			}
+		},
 		methods:{
 			checkLogin(){
 				axios.get('/users/checkLogin').then((response)=>{
 					let res = response.data;
 					if(res.status == "0"){
-						this.nickName = res.result;
+						// this.nickName = res.result;
+						this.$store.commit('updateUserInfo',res.result);
 					}
 				})
 			},
@@ -114,7 +120,8 @@
 					if(res.status == "0") {
 						this.errorTip = false;
 						this.loginModalFlag = false;
-						this.nickName = res.result.userName;
+						// this.nickName = res.result.userName;
+						this.$store.commit('updateUserInfo',res.result.userName);
 					}else{
 						this.errorTip = true;
 					}
