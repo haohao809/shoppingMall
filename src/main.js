@@ -6,12 +6,21 @@ import router from './router'
 import VueLazyLoad from 'vue-lazyload'
 import infiniteScroll from  'vue-infinite-scroll'
 import {currency} from './util/currency'
+import Vuex from 'vuex'
 Vue.config.productionTip = false
+Vue.use(Vuex)
 Vue.use(VueLazyLoad,{
 	loading:"/static/loading-svg/loading-bars.svg"
 })
 Vue.use(infiniteScroll);
 Vue.filter("currency",currency);
+const store = new Vuex.store({
+	state:{
+		nickName: '',
+		cartCount: 0
+	}
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
