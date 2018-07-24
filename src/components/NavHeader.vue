@@ -79,6 +79,7 @@
 <script>
 	import './../assets/css/login.css'
 	import axios from 'axios'
+	import { mapState } from 'vuex'
 	export default{
 		data(){
 			return{
@@ -94,12 +95,13 @@
 			this.checkLogin();
 		},
 		computed:{
-			nickName(){
-				return this.$store.state.nickName;
-			},
-			cartCount(){
-				return this.$store.state.cartCount;
-			}
+			...mapState(['nickName','cartCount'])
+			// nickName(){
+			// 	return this.$store.state.nickName;
+			// },
+			// cartCount(){
+			// 	return this.$store.state.cartCount;
+			// }
 		},
 		methods:{
 			checkLogin(){
@@ -108,6 +110,7 @@
 					if(res.status == "0"){
 						// this.nickName = res.result;
 						this.$store.commit('updateUserInfo',res.result);
+						this.getCartCount();
 					}
 				})
 			},
@@ -126,7 +129,7 @@
 						this.loginModalFlag = false;
 						// this.nickName = res.result.userName;
 						this.$store.commit('updateUserInfo',res.result.userName);
-						this.getCartCount();
+						
 					}else{
 						this.errorTip = true;
 					}
@@ -145,7 +148,7 @@
 			getCartCount(){
 				axios.get('/users/getCartCount').then((response)=>{
 					let res = response.data;
-					this.$store.commit('updateCartCount',res.result)
+					this.$store.commit('initCartCount',res.result)
 				})
 			}
 		}
