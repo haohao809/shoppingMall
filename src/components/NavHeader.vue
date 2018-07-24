@@ -32,6 +32,7 @@
 					<a href="javascript: ;" class="navbar-link" @click="loginModalFlag=true" v-if="!nickName">Login</a>
 					<a href="javascript: ;" class="navbar-link" @click="logOut" v-else>Logout</a>
 					<div class="navbar-cart-container">
+					<span class="navbar-cart-count" v-text="cartCount" v-if="cartCount"></span>
 	                  <a class="navbar-link navbar-cart-link" href="/#/cart">
 	                    <svg class="navbar-cart-logo">
 	                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-cart"></use>
@@ -95,6 +96,9 @@
 		computed:{
 			nickName(){
 				return this.$store.state.nickName;
+			},
+			cartCount(){
+				return this.$store.state.cartCount;
 			}
 		},
 		methods:{
@@ -122,6 +126,7 @@
 						this.loginModalFlag = false;
 						// this.nickName = res.result.userName;
 						this.$store.commit('updateUserInfo',res.result.userName);
+						this.getCartCount();
 					}else{
 						this.errorTip = true;
 					}
@@ -131,10 +136,17 @@
 				axios.post("/users/logout").then((response)=>{
 					let res = response.data;
 					if(res.status === "0") {
-						this.nickName = "";						
+						this.nickName = "";	
+						this.$store.commit('updateUserInfo',res.result.userName)					
 					}
 				})
 
+			},
+			getCartCount(){
+				axios.get('/users/getCartCount').then((response)=>{
+					let res = response.data;
+					this.$store.commit('updateCartCount',res.result)
+				})
 			}
 		}
 	}
@@ -185,10 +197,10 @@
 	 .navbar-link {
     padding-left: 15px;
   }
-	 .nav-cart-container{
+	 .navbar-cart-container{
 	 	position: relative;
 	 }
-	 .nav-cart-count {
+	 .navbar-cart-count {
 	 	justify-content: center;
 	 	align-items: center;
 	 	position: absolute;
@@ -197,7 +209,7 @@
 	 	width: 20px;
 	 	border-radius: 10px;
 	 	color: white;
-	 	background-color: #eb77d;
+	 	background-color: #eb767d;
 	 	font-size: 16px;
 	 	font-weight: bold;
 	 	text-align: center;

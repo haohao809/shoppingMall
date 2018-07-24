@@ -74,7 +74,35 @@ router.get("/checkLogin", function(req, res, next) {
     });
   }
 })
-
+router.get("/getCartCount", function (req,res,next) {
+  if(req.cookies && req.cookies.userId) {
+    var userId = req.cookies.userId;
+    User.findOne({"userId" : userId},function(err,doc) {
+        if(err){
+          res.json({
+            status: "0",
+            msg:err.message
+          });
+        }else{
+           let cartList = doc.cartList;
+           let cartCount = 0;
+           cartList.map(function(item){
+             cartCount+= parseFloat(item.productNum) 
+           });
+           res.json({
+             status: "0",
+             msg: "",
+             result:cartCount
+           })
+        }
+    })
+  }else{
+      res.json({
+        status: "0",
+        msg: "当前用户不存在"
+      })
+  }
+})
 //查询当前用户购物车数据
 router.get("/cartList", function(req, res, next) {
   var userId = req.cookies.userId;
