@@ -182,7 +182,7 @@
 					orderTotal: this.orderTotal
 				}).then((response)=> {
 					let res = response.data;
-					if(res.status=='0') {
+					if(res.status==='0') {
 						console.log('order created suc.');
 						this.$router.push({
 							path:'/orderSuccess?orderId=' + res.result.orderId
