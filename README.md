@@ -2,6 +2,10 @@
 //执行顺序
 启动mongoDB
 
+ios 启动
+cd /usr/local/mongodb/bin
+sudo ./mongod
+
 启动server服务
 
 node server/bin/www
