@@ -1,4 +1,14 @@
 # shoppingmall
+//执行顺序
+启动mongoDB
+
+启动server服务
+
+node server/bin/www
+
+启动 vue
+
+npm run dev
 
 > A Vue.js project
 
